@@ -81,12 +81,14 @@ config:
       endpoint: "${env:DT_ENDPOINT}/api/v2/otlp"
       headers:
         Authorization: "Api-Token ${env:DT_API_TOKEN}"
+    debug:
+      verbosity: detailed
   service:
     pipelines:
       traces:
         receivers: [otlp]
         processors: []
-        exporters: [otlphttp]
+        exporters: [otlphttp, debug]
       logs:
         receivers: [otlp]
         # receivers: [otlp, filelog] # Use when running locally
